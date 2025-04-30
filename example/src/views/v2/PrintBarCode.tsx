@@ -15,15 +15,18 @@ import PrinterImin, {
   IminBarcodeTextPos,
 } from 'react-native-printer-imin';
 export default function PrintBarCode() {
-
-    //声明属性要和接口里面的属性保持一致
+  //声明属性要和接口里面的属性保持一致
   const [barCodeContent, setBarCodeContent] = React.useState('');
   const [barCodeWidth, setBarCodeWidth] = React.useState('');
-  const [widthPlaceholder, setWidthPlaceholder] = React.useState('Please enter');
+  const [widthPlaceholder, setWidthPlaceholder] =
+    React.useState('Please enter');
   const [barCodeHeight, setBarCodeHeight] = React.useState('');
-  const [heightPlaceholder, setHeightPlaceholder] = React.useState('Please enter');
+  const [heightPlaceholder, setHeightPlaceholder] =
+    React.useState('Please enter');
   const [align, setAlign] = React.useState<number>(IminPrintAlign.left);
-  const [position, setBarCodeHriPosition] = React.useState<number>(IminBarcodeTextPos.none);
+  const [position, setBarCodeHriPosition] = React.useState<number>(
+    IminBarcodeTextPos.none
+  );
   const [barCodeType, setBarCodeType] = React.useState<number>(
     IminBarcodeType.code39
   );
@@ -63,15 +66,14 @@ export default function PrintBarCode() {
               <TextInput
                 value={barCodeWidth}
                 onChange={(value) => {
-                    if (value === '') {
-                        setBarCodeWidth('');
-                        return;
-                      }
-                    const newValue = parseInt(value, 10);
-                   if (!isNaN(newValue) && newValue >= 1 && newValue <= 6) {
-                       setBarCodeWidth(newValue.toString());
-                    }
-
+                  if (value === '') {
+                    setBarCodeWidth('');
+                    return;
+                  }
+                  const newValue = parseInt(value, 10);
+                  if (!isNaN(newValue) && newValue >= 1 && newValue <= 6) {
+                    setBarCodeWidth(newValue.toString());
+                  }
                 }}
                 placeholder={widthPlaceholder}
                 onFocus={() => setWidthPlaceholder('(1 <= width <= 6)')}
@@ -87,14 +89,14 @@ export default function PrintBarCode() {
               <TextInput
                 value={barCodeHeight}
                 onChange={(value) => {
-                    if (value === '') {
-                        setBarCodeHeight('');
-                        return;
-                      }
-                    const newValue = parseInt(value, 10);
-                    if (!isNaN(newValue) && newValue <= 255) {
-                        setBarCodeHeight(newValue.toString());
-                    }
+                  if (value === '') {
+                    setBarCodeHeight('');
+                    return;
+                  }
+                  const newValue = parseInt(value, 10);
+                  if (!isNaN(newValue) && newValue <= 255) {
+                    setBarCodeHeight(newValue.toString());
+                  }
                 }}
                 placeholder={heightPlaceholder}
                 onFocus={() => setHeightPlaceholder('(24 <= height <= 255)')}
@@ -104,100 +106,100 @@ export default function PrintBarCode() {
             }
           />
 
-         <Cell
-                      title="BarCode Type"
-                      vertical
-                      value={barCodeTypeMap[barCodeType] || 'code39'}
-                      isLink
-                      onPress={() => {
-                        Selector({
-                          title: 'Please select',
-                          options: [
-                            {
-                              label: 'upcA',
-                              value: IminBarcodeType.upcA,
-                            },
-                            {
-                              label: 'upcE',
-                              value: IminBarcodeType.upcE,
-                            },
-                            {
-                              label: 'jan13',
-                              value: IminBarcodeType.jan13,
-                            },
-                            {
-                              label: 'jan8',
-                              value: IminBarcodeType.jan8,
-                            },
-                            {
-                              label: 'code39',
-                              value: IminBarcodeType.code39,
-                            },
-                            {
-                              label: 'itf',
-                              value: IminBarcodeType.itf,
-                            },
-                            {
-                              label: 'codabar',
-                              value: IminBarcodeType.codabar,
-                            },
-                            {
-                              label: 'code93',
-                              value: IminBarcodeType.code93,
-                            },
-                            {
-                              label: 'code128',
-                              value: IminBarcodeType.code128,
-                            },
-                          ],
-                          value: barCodeType,
-                          cancellable: true,
-                        }).then((k) => {
-                          setBarCodeType(k as number);
-                        });
-                      }}
-                    />
-            <Cell
-                      title="BarCode HRI Position"
-                      vertical
-                      value={
-                        position
-                          ? position === IminBarcodeTextPos.aboveText
-                            ? 'aboveText'
-                            : position === IminBarcodeTextPos.belowText
-                            ? 'belowText'
-                            : 'both'
-                          : 'None'
-                      }
-                      isLink
-                      onPress={() => {
-                        Selector({
-                          title: 'Please select',
-                          options: [
-                            {
-                              label: 'None',
-                              value: IminBarcodeTextPos.none,
-                            },
-                            {
-                              label: 'aboveText',
-                              value: IminBarcodeTextPos.aboveText,
-                            },
-                            {
-                              label: 'belowText',
-                              value: IminBarcodeTextPos.belowText,
-                            },
-                            {
-                              label: 'both',
-                              value: IminBarcodeTextPos.both,
-                            },
-                          ],
-                          value: position,
-                          cancellable: true,
-                        }).then((k) => {
-                          setBarCodeHriPosition(k as number);
-                        });
-                      }}
-                    />
+          <Cell
+            title="BarCode Type"
+            vertical
+            value={barCodeTypeMap[barCodeType] || 'code39'}
+            isLink
+            onPress={() => {
+              Selector({
+                title: 'Please select',
+                options: [
+                  {
+                    label: 'upcA',
+                    value: IminBarcodeType.upcA,
+                  },
+                  {
+                    label: 'upcE',
+                    value: IminBarcodeType.upcE,
+                  },
+                  {
+                    label: 'jan13',
+                    value: IminBarcodeType.jan13,
+                  },
+                  {
+                    label: 'jan8',
+                    value: IminBarcodeType.jan8,
+                  },
+                  {
+                    label: 'code39',
+                    value: IminBarcodeType.code39,
+                  },
+                  {
+                    label: 'itf',
+                    value: IminBarcodeType.itf,
+                  },
+                  {
+                    label: 'codabar',
+                    value: IminBarcodeType.codabar,
+                  },
+                  {
+                    label: 'code93',
+                    value: IminBarcodeType.code93,
+                  },
+                  {
+                    label: 'code128',
+                    value: IminBarcodeType.code128,
+                  },
+                ],
+                value: barCodeType,
+                cancellable: true,
+              }).then((k) => {
+                setBarCodeType(k as number);
+              });
+            }}
+          />
+          <Cell
+            title="BarCode HRI Position"
+            vertical
+            value={
+              position
+                ? position === IminBarcodeTextPos.aboveText
+                  ? 'aboveText'
+                  : position === IminBarcodeTextPos.belowText
+                  ? 'belowText'
+                  : 'both'
+                : 'None'
+            }
+            isLink
+            onPress={() => {
+              Selector({
+                title: 'Please select',
+                options: [
+                  {
+                    label: 'None',
+                    value: IminBarcodeTextPos.none,
+                  },
+                  {
+                    label: 'aboveText',
+                    value: IminBarcodeTextPos.aboveText,
+                  },
+                  {
+                    label: 'belowText',
+                    value: IminBarcodeTextPos.belowText,
+                  },
+                  {
+                    label: 'both',
+                    value: IminBarcodeTextPos.both,
+                  },
+                ],
+                value: position,
+                cancellable: true,
+              }).then((k) => {
+                setBarCodeHriPosition(k as number);
+              });
+            }}
+          />
 
           <Cell
             title="Align"
@@ -235,22 +237,21 @@ export default function PrintBarCode() {
             }}
           />
 
-
           <Blank top={10} bottom={10} />
           <Button
             type="primary"
             text="Print BarCode"
             onPress={() => {
-                const width = barCodeWidth ? Number(barCodeWidth) : 2;
-                const height = barCodeHeight ? Number(barCodeHeight) : 70;
-                PrinterImin.setBarCodeWidth(width);
-                PrinterImin.setBarCodeHeight(height);
+              const width = barCodeWidth ? Number(barCodeWidth) : 2;
+              const height = barCodeHeight ? Number(barCodeHeight) : 70;
+              PrinterImin.setBarCodeWidth(width);
+              PrinterImin.setBarCodeHeight(height);
 
-                PrinterImin.printBarCode(barCodeType,barCodeContent,{
-                    position,
-                    align,
-                });
-    
+              PrinterImin.printBarCode(barCodeType, barCodeContent, {
+                position,
+                align,
+              });
+
               PrinterImin.printAndFeedPaper(70);
             }}
           />

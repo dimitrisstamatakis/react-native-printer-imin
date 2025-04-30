@@ -32,43 +32,58 @@ export default function App() {
   console.log('version:', PrinterImin.version);
   return (
     <Provider>
-    <LanguageProvider>
-      <LanguageContext.Consumer>
-       {({ language }) => (
-       <NavigationContainer key={language} >
-        <Stack.Navigator initialRouteName="Home">
-          {PrinterImin.version === '2.0.0' ? (
-            <>
-              <Stack.Screen
-                name="Home"
-                options={{
-                  title: 'v2 Printer API',
-                }}
-              >
-                {(props) => {
-                  return (
-                    <NewHomePage {...props} printerStatus={printerStatus} />
-                  );
-                }}
-              </Stack.Screen>
-              <Stack.Screen name="PrinterInfo" component={PrinterInfoPage} />
-              <Stack.Screen name="CashBoxInfo" component={CashBoxInfoPage} />
-              <Stack.Screen name="Transaction" component={TransactionPage} />
-              <Stack.Screen name="PrintText" component={PrintTextPage} />
-              <Stack.Screen name="PrintBarCode" component={PrintBarCodePage} />
-            </>
-          ) : (
-            <Stack.Screen
-              name="Home"
-              component={HomePage}
-              options={{ title: 'v1 Printer API' }}
-            />
+      <LanguageProvider>
+        <LanguageContext.Consumer>
+          {({ language }) => (
+            <NavigationContainer key={language}>
+              <Stack.Navigator initialRouteName="Home">
+                {PrinterImin.version === '2.0.0' ? (
+                  <>
+                    <Stack.Screen
+                      name="Home"
+                      options={{
+                        title: 'v2 Printer API',
+                      }}
+                    >
+                      {(props) => {
+                        return (
+                          <NewHomePage
+                            {...props}
+                            printerStatus={printerStatus}
+                          />
+                        );
+                      }}
+                    </Stack.Screen>
+                    <Stack.Screen
+                      name="PrinterInfo"
+                      component={PrinterInfoPage}
+                    />
+                    <Stack.Screen
+                      name="CashBoxInfo"
+                      component={CashBoxInfoPage}
+                    />
+                    <Stack.Screen
+                      name="Transaction"
+                      component={TransactionPage}
+                    />
+                    <Stack.Screen name="PrintText" component={PrintTextPage} />
+                    <Stack.Screen
+                      name="PrintBarCode"
+                      component={PrintBarCodePage}
+                    />
+                  </>
+                ) : (
+                  <Stack.Screen
+                    name="Home"
+                    component={HomePage}
+                    options={{ title: 'v1 Printer API' }}
+                  />
+                )}
+              </Stack.Navigator>
+            </NavigationContainer>
           )}
-        </Stack.Navigator>
-      </NavigationContainer>
-      )}
-      </LanguageContext.Consumer>
-     </LanguageProvider>
+        </LanguageContext.Consumer>
+      </LanguageProvider>
     </Provider>
   );
 }
