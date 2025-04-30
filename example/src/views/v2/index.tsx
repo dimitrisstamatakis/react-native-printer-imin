@@ -18,26 +18,18 @@ import PrinterImin, {
   IminPrintAlign,
   // IminTypeface,
   IminQrcodeCorrectionLevel,
-  // IminBarcodeType, ⛔ was defined but never used
-  // IminBarcodeTextPos, ⛔ was defined but never used
+  IminBarcodeType,
+  IminBarcodeTextPos,
   ShapeStyle,
+
 } from 'react-native-printer-imin';
 import {
-  defaultLabelAreaStyle,
-  defaultLabelTextStyle,
-  LabelAreaStyle,
-  LabelTextStyle,
-  LabelBarCodeStyle,
-  defaultLabelBarCodeStyle,
-  LabelCanvasStyle,
-  defaultLabelCanvasStyle,
-  // LabelBitmapStyle, ⛔ was defined but never used
-  // defaultLabelBitmapStyle, ⛔ was defined but never used
-  LabelQrCodeStyle,
-  defaultLabelQrCodeStyle,
-  // LabelPrintBitmapStyle, ⛔ was defined but never used
+  defaultLabelAreaStyle, defaultLabelTextStyle,
+  LabelAreaStyle, LabelTextStyle, LabelBarCodeStyle, defaultLabelBarCodeStyle,
+  LabelCanvasStyle, defaultLabelCanvasStyle, LabelBitmapStyle, defaultLabelBitmapStyle,
+  LabelQrCodeStyle, defaultLabelQrCodeStyle, LabelPrintBitmapStyle,
   Symbology,
-  HumanReadable,
+  HumanReadable
 } from '../../../../src/typing';
 
 export default function NewHome({
@@ -127,95 +119,25 @@ export default function NewHome({
                 <Text
                   style={styles.item}
                   onPress={async () => {
-                    try {
-                      // 🧪 Uncomment to Test every method call in isolation
-                      // console.log('');
-                      // console.log('-----------------------');
-
-                      // ✅ Working
-                      // const serialNumber =
-                      //   await PrinterImin.getPrinterSerialNumber();
-                      // console.log('serialNumber:', serialNumber);
-
-                      // ✅ Working
-                      // const modelName = await PrinterImin.getPrinterModelName();
-                      // console.log('modelName:', modelName);
-                      // ✅ Working
-                      // const thermalHead =
-                      //   await PrinterImin.getPrinterThermalHead();
-                      // console.log('thermalHead:', thermalHead);
-                      // ✅ Working
-                      // const firmwareVersion =
-                      //   await PrinterImin.getPrinterFirmwareVersion();
-                      // console.log('firmwareVersion:', firmwareVersion);
-                      // ✅ Working
-                      // const printServiceVersion =
-                      //   await PrinterImin.getServiceVersion();
-                      // console.log('printServiceVersion:', printServiceVersion);
-                      // ✅ Working
-                      // const hardwareVersion =
-                      //   await PrinterImin.getPrinterHardwareVersion();
-                      // console.log('hardwareVersion:', hardwareVersion);
-                      // ✅ Working
-                      // const usbPrinterVidPid =
-                      //   await PrinterImin.getUsbPrinterVidPid();
-                      // console.log('usbPrinterVidPid:', usbPrinterVidPid);
-                      // ✅ Working
-                      // const usbDevicesName =
-                      //   await PrinterImin.getUsbDevicesName();
-                      // console.log('usbDevicesName:', usbDevicesName);
-                      // ✅ Working
-                      // const printerDensity =
-                      //   await PrinterImin.getPrinterDensity();
-                      // console.log('printerDensity:', printerDensity);
-                      // ✅ Working
-                      // const paperDistance =
-                      //   await PrinterImin.getPrinterPaperDistance();
-                      // console.log('paperDistance:', paperDistance);
-                      // ✅ Working
-                      // const paperType = await PrinterImin.getPrinterPaperType();
-                      // console.log('paperType:', paperType);
-
-                      // 🪲+🔕 Silently never resolves
-                      // const printerCutTimes =
-                      //   await PrinterImin.getPrinterCutTimes();
-                      // console.log('printerCutTimes:', printerCutTimes);
-
-                      // 🪲+🔕 Silently never resolves
-                      // const printerMode = await PrinterImin.getPrinterMode();
-                      // console.log('printerMode:', printerMode);
-
-                      const params = {
-                        serialNumber:
-                          await PrinterImin.getPrinterSerialNumber(), // ✅ Working
-                        modelName: await PrinterImin.getPrinterModelName(), // ✅ Working
-                        thermalHead: await PrinterImin.getPrinterThermalHead(), // ✅ Working
-                        firmwareVersion:
-                          await PrinterImin.getPrinterFirmwareVersion(), // ✅ Working
-                        printServiceVersion:
-                          await PrinterImin.getServiceVersion(), // ✅ Working
-                        hardwareVersion:
-                          await PrinterImin.getPrinterHardwareVersion(), // ✅ Working
-                        usbPrinterVidPid:
-                          await PrinterImin.getUsbPrinterVidPid(), // ✅ Working
-                        usbDevicesName: await PrinterImin.getUsbDevicesName(), // ✅ Working
-                        printerDensity: await PrinterImin.getPrinterDensity(), // ✅ Working
-                        paperDistance:
-                          await PrinterImin.getPrinterPaperDistance(), // ✅ Working
-                        paperType: await PrinterImin.getPrinterPaperType(), // ✅ Working
-                        // printerCutTimes: await PrinterImin.getPrinterCutTimes(), // 🪲+🔕 Silently never resolves
-                        // printerMode: await PrinterImin.getPrinterMode(), // 🪲+🔕 Silently never resolves
-                      };
-
-                      console.log('BBBBBBBBBBBBBBBBB');
-
-                      console.log('Navigating to PrinterInfo with:', params);
-                      navigation.navigate('PrinterInfo', params);
-                    } catch (error) {
-                      console.log('BBBBBBBBBBBBBBBBB');
-
-                      console.error('Error navigating to PrinterInfo:', error);
-                    }
+                    await navigation.navigate('PrinterInfo', {
+                      serialNumber: await PrinterImin.getPrinterSerialNumber(),
+                      modelName: await PrinterImin.getPrinterModelName(),
+                      thermalHead: await PrinterImin.getPrinterThermalHead(),
+                      firmwareVersion:
+                        await PrinterImin.getPrinterFirmwareVersion(),
+                      printServiceVersion:
+                        await PrinterImin.getServiceVersion(),
+                      hardwareVersion:
+                        await PrinterImin.getPrinterHardwareVersion(),
+                      usbPrinterVidPid: await PrinterImin.getUsbPrinterVidPid(),
+                      usbDevicesName: await PrinterImin.getUsbDevicesName(),
+                      printerDensity: await PrinterImin.getPrinterDensity(),
+                      paperDistance:
+                        await PrinterImin.getPrinterPaperDistance(),
+                      paperType: await PrinterImin.getPrinterPaperType(),
+                      printerCutTimes: await PrinterImin.getPrinterCutTimes(),
+                      printerMode: await PrinterImin.getPrinterMode(),
+                    });
                   }}
                 >
                   Printer Info
@@ -584,22 +506,23 @@ export default function NewHome({
               <Col span={12}>
                 <Text
                   style={styles.item}
+
                   onPress={() => {
                     navigation.navigate('PrintBarCode');
                   }}
-                  //                   onPress={async () => {
-                  //                     await PrinterImin.printBarCode(
-                  //                       IminBarcodeType.jan13,
-                  //                       '0123456789012',
-                  //                       {
-                  //                         align: IminPrintAlign.center,
-                  //                         position: IminBarcodeTextPos.aboveText,
-                  //                         width: 400,
-                  //                         height: 50,
-                  //                       }
-                  //                     );
-                  //                     await PrinterImin.printAndFeedPaper(100);
-                  //                   }}
+                //                   onPress={async () => {
+                //                     await PrinterImin.printBarCode(
+                //                       IminBarcodeType.jan13,
+                //                       '0123456789012',
+                //                       {
+                //                         align: IminPrintAlign.center,
+                //                         position: IminBarcodeTextPos.aboveText,
+                //                         width: 400,
+                //                         height: 50,
+                //                       }
+                //                     );
+                //                     await PrinterImin.printAndFeedPaper(100);
+                //                   }}
                 >
                   printBarCode
                 </Text>
@@ -705,7 +628,8 @@ export default function NewHome({
                       posX: 10,
                       posY: 20,
                       enableBold: true,
-                    };
+                    }
+
 
                     const labelBarCodeStyle: LabelBarCodeStyle = {
                       ...defaultLabelBarCodeStyle,
@@ -718,6 +642,7 @@ export default function NewHome({
                       readable: HumanReadable.POS_TWO,
                     };
 
+
                     const labelQrCodeStyle: LabelQrCodeStyle = {
                       ...defaultLabelQrCodeStyle,
                       qrCode: '123456',
@@ -725,6 +650,7 @@ export default function NewHome({
                       posY: 120,
                       width: 3,
                     };
+
 
                     // try {
 
@@ -734,6 +660,9 @@ export default function NewHome({
                     // }
 
                     try {
+
+
+
                       await PrinterImin.labelInitCanvas(labelCanvasStyle);
                       await PrinterImin.labelAddText(labelTextStyle);
                       await PrinterImin.labelAddArea(labelAreaStyle);
@@ -745,9 +674,7 @@ export default function NewHome({
                         if (toastClose.current) {
                           toastClose.current.close();
                         }
-                        console.log(
-                          `${info.result}+resultCode+${info.resultCode}`
-                        );
+                        console.log(`${info.result}+resultCode+${info.resultCode}`);
                         // toastClose.current = Toast({
                         //   type: 'icon',
                         //   message: `${info.result}+resultCode+${info.resultCode}`,
@@ -759,6 +686,9 @@ export default function NewHome({
                     } catch (error) {
                       console.error('Error adding label text:', error);
                     }
+
+
+
 
                     // const labelInitCanva: LabelCanvasStyle = {
                     //   width: 50*8,
@@ -773,11 +703,16 @@ export default function NewHome({
                     // } catch (error) {
                     //   console.error('Error adding label area:', error);
                     // }
+
+
+
+
                   }}
                 >
                   printLabel
                 </Text>
               </Col>
+
             </Row>
           </Card>
         </Space>
