@@ -54,17 +54,17 @@ List of devices attached
 <device-name>       device (or unauthorized)
 ```
 
-If you see `unauthorized`, check the Device's screen, probably a modal has appears that you need to confirm.
-if you see `device`, you are good to go, proceed to next step.
+- If you see `unauthorized`, check the Device's screen, probably a modal has appears that you need to confirm.
+- if you see `device`, you are good to go, proceed to next step.
 
-8. Now we need to bind the Metro Server running on the PC through the ADB to make the device to think that its running locally.
+8. Now we need to **bind the Metro Server** running on the PC **through the ADB** to make the device to think that its running locally.
 
 ```sh
 ➜  adb reverse tcp:3000 tcp:3000
 3000
 ```
 
-> 🚨⚠️ Usually RN Devs use `adb reverse tcp:8081 tcp:8081`, but iMin has something running on port 8081 or its blocked, therefore we need to use a different one.
+> 🚨⚠️ Usually RN Devs use `adb reverse tcp:8081 tcp:8081`, but iMin has something running on port 8081 or its blocked, therefore we need to use a different port.
 
 9. Now execute the following to start the Metro Bundler's Dev Server:
 
@@ -72,25 +72,29 @@ if you see `device`, you are good to go, proceed to next step.
 yarn example:start # ⚠️🚨 from the root dir! Not "react-native-printer-imin/example"
 ```
 
-10. I will assume you know how to build, and install the App in the Device. If you do not ChatGPT or use GitHub's Copilot (it fit the whole codebase on its context window)
+10. I will assume you know how to build, and install the App in the Device. If you do not, use ChatGPT or GitHub's Copilot (it can fit the whole codebase on its context window).
 
-11. Open the App and run:
+11.**Open the App** from the Android Device
+
+12. Once its open, **from your PC's terminal run**:
 
 ```sh
 adb shell input keyevent 82
 ```
 
-12. This should open React Native's Dev Tools
+13. This should open React Native's **Dev Tools**
 
-13. Select the "Settings" option (or maybe its called Dev Settings)
+14. Select the **"Settings"** option (or maybe its called Dev Settings)
 
-14. Under the "Debugging" Section, presses on "Debug server host & port for device"
+15. Under the **"Debugging" Section**, presses on "**Debug server host & port for device**"
 
-15. Enter: `localhost:3000` and press OK
+16. Enter: `localhost:3000` and press OK
 
-16. Go back and reload the App -> `adb shell input keyevent 82` -> "Reload" (or Restart)
+17. **Go back and reload the App** -> `adb shell input keyevent 82` -> "**Reload**" (or Restart)
 
-17. 🎊 Congratulations, it should work now!
+18. 🎊 **Congratulations**, it should work now!
+
+---
 
 ## Installation
 
