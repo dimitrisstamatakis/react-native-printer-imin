@@ -1,16 +1,16 @@
-import * as React from 'react';
 import { Provider } from '@fruits-chain/react-native-xiaoshu';
-import PrinterImin from 'react-native-printer-imin';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NewHomePage from './views/v2';
-import PrinterInfoPage from './views/v2/PrinterInfo';
-import CashBoxInfoPage from './views/v2/CashBoxInfo';
-import TransactionPage from './views/v2/Transaction';
-import PrintTextPage from './views/v2/PrintText';
-import PrintBarCodePage from './views/v2/PrintBarCode';
+import * as React from 'react';
+import PrinterImin from 'react-native-printer-imin';
+import { LanguageContext, LanguageProvider } from './LanguageContext';
 import HomePage from './views/v1';
-import { LanguageProvider, LanguageContext } from './LanguageContext';
+import NewHomePage from './views/v2';
+import CashBoxInfoPage from './views/v2/CashBoxInfo';
+import PrintBarCodePage from './views/v2/PrintBarCode';
+import PrinterInfoPage from './views/v2/PrinterInfo';
+import PrintTextPage from './views/v2/PrintText';
+import TransactionPage from './views/v2/Transaction';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [printerStatus, setPrinterStatus] = React.useState<{
@@ -29,6 +29,7 @@ export default function App() {
       close();
     };
   }, [printerStatus]);
+
   console.log('version:', PrinterImin.version);
   return (
     <Provider>
