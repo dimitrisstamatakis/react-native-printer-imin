@@ -2,7 +2,7 @@ import { Provider } from '@fruits-chain/react-native-xiaoshu';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import PrinterImin from 'react-native-printer-imin';
+import PrinterImin, { IminPrintAlign } from 'react-native-printer-imin';
 import { LanguageContext, LanguageProvider } from './LanguageContext';
 import HomePage from './views/v1';
 import NewHomePage from './views/v2';
@@ -31,6 +31,84 @@ export default function App() {
   }, [printerStatus]);
 
   console.log('version:', PrinterImin.version);
+
+  // React.useEffect(() => {
+  //   async function enableGreek(encodePages: string[]) {
+  //     // 1 – make sure the service is bound and params are ready
+
+  //     // 2 – fetch the table (you’ve done this already)
+
+  //     // 3 – pick whichever Greek page you prefer
+  //     const idx = encodePages.indexOf('CP1253'); // or 'CP1253'
+  //     if (idx !== -1) {
+  //       await PrinterImin.setFontCodepage(idx);
+  //       console.log('Printer switched to', encodePages[idx]);
+  //     } else {
+  //       throw new Error(
+  //         'Greek code-page not found – will fall back to bitmap text'
+  //       );
+  //     }
+  //   }
+
+  //   async function getPrinterStatus() {
+  //     // 2 – get the printer status
+  //     const status = await PrinterImin.getPrinterStatus();
+  //     console.log('Printer status:', status);
+  //   }
+
+  //   async function getEncodingsList() {
+  //     const encodings = await PrinterImin.getFontCodepage();
+  //     return encodings;
+  //   }
+
+  //   async function initPrinter() {
+  //     await PrinterImin.initPrinter();
+  //     await PrinterImin.initPrinterParams();
+  //     await getPrinterStatus();
+  //   }
+
+  //   async function start() {
+  //     try {
+  //       await initPrinter();
+  //       const srv = await PrinterImin.getServiceVersion();
+  //       console.log('Service:', srv); // e.g. "1.0.0.12" or "1.0.0.15"
+  //       const encodings = await getEncodingsList();
+  //       console.log('Encodings:', encodings);
+
+  //       await enableGreek(encodings);
+
+  //       const curEnc = await PrinterImin.getCurCodepage();
+
+  //       await PrinterImin.printText('Καλημέρα κόσμε\n', 'CP1253');
+
+  //       console.log('Current Encoding:', curEnc);
+  //     } catch (error) {
+  //       console.error('error:', error);
+  //     }
+  //   }
+  //   start();
+  // }, []);
+
+  React.useEffect(() => {
+    (async () => {
+      await PrinterImin.initPrinter();
+      await PrinterImin.initPrinterParams();
+
+      const pages = await PrinterImin.getFontCodepage();
+      const idx = pages.indexOf('CP1253'); // or 'CP737'
+      await PrinterImin.setFontCodepage(idx);
+
+      // await PrinterImin.printText('Καλημέρα κόσμε\n', 'CP1253');
+
+      await PrinterImin.printTextBitmap('Καλημέρα κόσμε', {
+        align: IminPrintAlign.center,
+      });
+
+      const cur = await PrinterImin.getCurCodepage();
+      console.log('Current code-page after print:', cur); // CP1253
+    })();
+  }, []);
+
   return (
     <Provider>
       <LanguageProvider>
