@@ -30,6 +30,19 @@ export default function App() {
     };
   }, [printerStatus]);
 
+  React.useEffect(() => {
+    async function init() {
+      try {
+        const list = await PrinterImin.getEncodeList();
+        console.log('getEncodeList', list);
+      } catch (error) {
+        console.error('error', error);
+      }
+    }
+
+    init();
+  }, []);
+
   console.log('version:', PrinterImin.version);
   return (
     <Provider>
