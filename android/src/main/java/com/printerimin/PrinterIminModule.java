@@ -1022,11 +1022,19 @@ public class PrinterIminModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getEncodeList(final Promise promise) {
     try {
-      if (iminPrintUtils == null) {
-        List<String> encodeList = PrinterHelper.getInstance().getEncodeList();
-        promise.resolve(encodeList);
+      if (iminPrintUtils == null) {                  // SDK-2.0 path
+        List<?> javaList = PrinterHelper.getInstance().getEncodeList();
+  
+        WritableArray jsArray = Arguments.createArray();
+        for (Object item : javaList) {
+          // If the item is already a string you can cast directly.
+          // Otherwise pick the field that contains the human-readable name,
+          // e.g. ((Encode)item).getName()
+          jsArray.pushString(item.toString());
+        }
+        promise.resolve(jsArray);                    // <-- bridge-safe
       } else {
-        promise.resolve(null);
+        promise.resolve(null);                       // SDK-1.0 path
       }
     } catch (Exception e) {
       promise.reject("getEncodeList_failed", e.getMessage());
