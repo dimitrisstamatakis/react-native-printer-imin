@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "example": "yarn workspace react-native-printer-imin-example",
+    "example:start": "yarn workspace react-native-printer-imin-example start",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "",
